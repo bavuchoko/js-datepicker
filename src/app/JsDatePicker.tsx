@@ -5,6 +5,7 @@ import {faCalendarMinus,} from "@fortawesome/free-regular-svg-icons";
 import Calendar from "./sub/Calendar";
 import {formatDate} from "./hook/useGenerateCalendar";
 import Buttons from "./sub/component/Buttons";
+import '../index.css';
 import Timer from "./sub/Timer";
 import {useOutsideClick} from "./hook/useOutsideClick";
 import {useDeterminePosition} from "./hook/useDeterminePosition";
