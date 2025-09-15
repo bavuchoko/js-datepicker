@@ -6,6 +6,8 @@ import Calendar from "./sub/Calendar";
 import {formatDate} from "./hook/useGenerateCalendar";
 import Buttons from "./sub/component/Buttons";
 import Timer from "./sub/Timer";
+import {useOutsideClick} from "./hook/useOutsideClick";
+import {useDeterminePosition} from "./hook/useDeterminePosition";
 
 
 const JsDatePicker:FC<DatePickerProps> =(
@@ -23,13 +25,14 @@ const JsDatePicker:FC<DatePickerProps> =(
     }
 )=>{
 
-    const [open, setOpen] = useState<boolean>(false)
-
-
     const ref = useRef<HTMLDivElement>(null);
+    const [open, setOpen] = useOutsideClick(ref);
+
+
 
     const labelRef = useRef<HTMLLabelElement>(null);
-    const [dropdownPosition, setDropdownPosition] = useState<'bottom' | 'top'>('bottom');
+    const [dropdownPosition, updatePosition] = useDeterminePosition(labelRef);
+
     const now = new Date();
     const [viewYear, setViewYear] = useState(now.getFullYear());
     const [viewMonth, setViewMonth] = useState(now.getMonth());
@@ -44,26 +47,12 @@ const JsDatePicker:FC<DatePickerProps> =(
     const calendarRef =  useRef<HTMLDivElement>(null);
 
     const handleOpen = () => {
-        if (labelRef.current) {
-
-            const rect = labelRef.current.getBoundingClientRect();
-            const calendarHeight = 280;
-            const spaceBelow = window.innerHeight - rect.bottom;
-            setDropdownPosition(spaceBelow < calendarHeight ? 'top' : 'bottom');
-        }
-        setOpen(!open);
+        updatePosition();
+        setOpen(prev => !prev);
     };
+
     const [calendarHeight, setCalendarHeight] = useState<number>(0)
 
-    useEffect(() => {
-        function handleClickOutside(event: MouseEvent) {
-            if (ref.current && !ref.current.contains(event.target as Node)) {
-                setOpen(false);
-            }
-        }
-        document.addEventListener("mousedown", handleClickOutside);
-        return () => document.removeEventListener("mousedown", handleClickOutside);
-    }, []);
 
     const displayDate = value;
 

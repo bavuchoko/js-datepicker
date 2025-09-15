@@ -8,7 +8,6 @@ interface TimerProps {
 
 const Timer: FC<TimerProps> = ({ value, setValue, height }) => {
 
-    const now = new Date();
     const hour = value ? value.getHours() : 9;
     const minute = value ? value.getMinutes() : 0;
 
@@ -71,7 +70,7 @@ const Timer: FC<TimerProps> = ({ value, setValue, height }) => {
                        }}
                        onClick={() => {
                            if (setValue) {
-                               const base = value || new Date(); // value 없으면 기본값 사용
+                               const base = value || new Date();
                                const newDate = new Date(base);
                                newDate.setHours(h);
 
@@ -99,7 +98,7 @@ const Timer: FC<TimerProps> = ({ value, setValue, height }) => {
                                const base = value || new Date();
                                const newDate = new Date(base);
                                newDate.setMinutes(m);
-                               if (!value) newDate.setHours(0);
+                               if (!value) newDate.setHours(hour);
                                newDate.setSeconds(0);
                                setValue(newDate);
                            }

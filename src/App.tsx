@@ -12,7 +12,7 @@ function App() {
 
         <JsDatePicker
             lang={'ko'}
-            // time
+            time
             onChange={(v)=>console.log(v)}
             value={test}
             setValue={setTest}
