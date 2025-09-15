@@ -1,24 +1,25 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import './index.css';
+import JsDatePicker from "./app/JsDatePicker";
 
 function App() {
+
+    const [test, setTest] = React.useState<Date|undefined>(undefined);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+        <div style={{width:'200px', height:'170px', background:'white'}}></div>
+
+        <JsDatePicker
+            lang={'ko'}
+            // time
+            onChange={(v)=>console.log(v)}
+            value={test}
+            setValue={setTest}
+            today
+            onSave={(v)=>console.log(v)}
+            onClear={()=>{setTest(undefined)}}
+        />
     </div>
   );
 }
