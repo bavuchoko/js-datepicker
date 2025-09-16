@@ -64,7 +64,7 @@ const JsDatePicker:FC<DatePickerProps> =(
     }, [open, viewYear, viewMonth]);
 
     return (
-        <div ref={ref} style={{ position: 'relative', width: style?.width ?? '120px'}}>
+        <div ref={ref} style={{ position: 'relative', width: style?.width ?? '140px'}}>
             <label
                 ref={labelRef}
                 style={style}
