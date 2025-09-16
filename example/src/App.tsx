@@ -6,7 +6,7 @@ function App() {
   return (
     <div className="App" style={{width:'100%', display:"flex"}}>
 
-    <JsDatePicker />
+    <JsDatePicker time/>
     </div>
   );
 }
