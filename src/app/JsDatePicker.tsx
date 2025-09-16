@@ -64,7 +64,7 @@ const JsDatePicker:FC<DatePickerProps> =(
     }, [open, viewYear, viewMonth]);
 
     return (
-        <div ref={ref} style={{ position: 'relative', width: style?.width ?? '160px'}}>
+        <div ref={ref} style={{ position: 'relative', width: style?.width ?? '120px'}}>
             <label
                 ref={labelRef}
                 style={style}
@@ -77,7 +77,7 @@ const JsDatePicker:FC<DatePickerProps> =(
                     icon={faCalendarMinus}
                     className={`js-datepicker-calendar-icon`}
                 />
-             <span >{formatDate(displayDate)} </span>
+             <span >{formatDate(displayDate, time)} </span>
         </label>
 
         <input id={'js-datepicker'} type={'date'} className={`js-datepicker-input`} style={style} />
