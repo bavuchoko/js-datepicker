@@ -5,6 +5,7 @@ interface TimerProps {
     setValue?: (date: Date) => void;
     height?: number | undefined;
     month?: number | undefined;
+
 }
 
 const Timer: FC<TimerProps> = ({ value, setValue, height, month }) => {
@@ -58,7 +59,7 @@ const Timer: FC<TimerProps> = ({ value, setValue, height, month }) => {
     }, [minute]);
 
    return(
-       <div style={{position:'absolute', right:'-210px', display:'flex', height:height, overflowY:'hidden'}}>
+       <div style={{position:'absolute',  display:'flex', height:height, overflowY:'hidden'}}>
            <div ref={hourRef} className={'no-scroll js-datepicker-timer'}>
                {hours.map((h) => (
                    <div

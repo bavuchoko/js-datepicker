@@ -1,4 +1,4 @@
-import {FC, useEffect, useRef, useState} from "react";
+import {CSSProperties, FC, useEffect, useRef, useState} from "react";
 import {DatePickerProps} from "./type/Types";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCalendarMinus,} from "@fortawesome/free-regular-svg-icons";
@@ -56,13 +56,21 @@ const JsDatePicker:FC<DatePickerProps> =(
 
 
     const displayDate = value;
+    const [timerStyle, setTimerStyle] = useState<CSSProperties>({});
+
 
     useEffect(() => {
-        if (calendarRef.current) {
+        if (open && calendarRef.current) {
             setCalendarHeight(calendarRef.current.offsetHeight);
+            const rect = calendarRef.current.getBoundingClientRect();
+            setTimerStyle({
+                position: 'absolute',
+                top: rect.top - 8,
+                left: rect.right -8,
+                zIndex: 1000,
+            });
         }
-    }, [open, viewYear, viewMonth]);
-
+    }, [open, calendarHeight, viewMonth, viewYear]);
 
 
     return (
@@ -86,6 +94,7 @@ const JsDatePicker:FC<DatePickerProps> =(
 
             {open && (
                 <div
+                    ref={calendarRef}
                     style={{
                         position: "absolute",
                         top: dropdownPosition === "bottom" ? "30px" : undefined,
@@ -97,7 +106,7 @@ const JsDatePicker:FC<DatePickerProps> =(
                         alignItems: "stretch"
                     }}
                 >
-                    <div ref={calendarRef} style={{ flex: 1, display: 'flex', flexDirection: 'column', border: "1px solid #eaecee",}}>
+                    <div style={{ flex: 1, display: 'flex', flexDirection: 'column', border: "1px solid #eaecee",}}>
                         <Calendar
                             lang={lang}
                             selected={value}
@@ -124,7 +133,9 @@ const JsDatePicker:FC<DatePickerProps> =(
                 </div>
             )}
             {open && time &&
-                <Timer value={value} setValue={setValue} height={calendarHeight} month={viewMonth} />
+                <div style={timerStyle}>
+                    <Timer value={value} setValue={setValue} height={calendarHeight} month={viewMonth} />
+                </div>
             }
         </div>
     )
