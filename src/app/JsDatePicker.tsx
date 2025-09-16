@@ -95,7 +95,7 @@ const JsDatePicker:FC<DatePickerProps> =(
 
             {open && (
                 <div
-
+                    className={`js-datepicker-container`}
                     style={{
                         position: "absolute",
                         top: dropdownPosition === "bottom" ? "30px" : undefined,
