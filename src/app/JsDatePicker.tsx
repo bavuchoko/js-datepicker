@@ -108,7 +108,7 @@ const JsDatePicker:FC<DatePickerProps> =(
                             />
                             { (onSave || onClear || today) &&
                                 <Buttons
-                                    onSave={()=>onSave?.(value)}
+                                    onSave={onSave}
                                     onClear={onClear}
                                     today
                                     onToday={()=> {

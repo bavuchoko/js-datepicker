@@ -6,12 +6,13 @@ const Buttons:FC<ButtonProps> =({
     onClear,
     onSave,
     onToday,
-    today
+    today,
+    value
                                 })=>{
     return (
         <div className={`js-datepicker-buttons`}>
             {onSave &&
-            <div onClick={onSave}>save</div>
+            <div onClick={()=> onSave(value)}>save</div>
             }
             {today &&
             <div onClick={onToday}>today</div>

@@ -27,6 +27,7 @@ export type CalendarProps = {
 
 
 export type ButtonProps = {
+    value?: Date | undefined;
     clear?:boolean;
     save?:boolean;
     today?:boolean;
