@@ -63,6 +63,8 @@ const JsDatePicker:FC<DatePickerProps> =(
         }
     }, [open, viewYear, viewMonth]);
 
+
+
     return (
         <div ref={ref} style={{ position: 'relative', width: style?.width ?? '140px'}}>
             <label
@@ -80,49 +82,50 @@ const JsDatePicker:FC<DatePickerProps> =(
              <span >{formatDate(displayDate, time)} </span>
         </label>
 
-        <input id={'js-datepicker'} type={'date'} className={`js-datepicker-input`} style={style} />
+        <input id={'js-datepicker'} type={'date'} className={`js-datepicker-input`} style={{position:'relative', ...style}} />
 
             {open && (
-                    <div
-                        style={{
-                            position: "absolute",
-                            top: dropdownPosition === "bottom" ? "30px" : undefined,
-                            bottom: dropdownPosition === "top" ? "55px" : undefined,
-                            zIndex: 1000,
-                            background:'white',
-                            display:'flex',
-                            alignItems: "stretch"
-                        }}
-                    >
-                        <div ref={calendarRef} style={{ flex: 1, display: 'flex', flexDirection: 'column', border: "1px solid #eaecee",}}>
+                <div
+                    style={{
+                        position: "absolute",
+                        top: dropdownPosition === "bottom" ? "30px" : undefined,
+                        bottom: dropdownPosition === "top" ? "55px" : undefined,
 
-                            <Calendar
-                                lang={lang}
-                                selected={value}
-                                handleSelect={handleSelect}
-                                today={now}
-                                viewYear={viewYear}
-                                viewMonth={viewMonth}
-                                setViewYear={setViewYear}
-                                setViewMonth={setViewMonth}
+                        zIndex: 1000,
+                        background:'white',
+                        display:'flex',
+                        alignItems: "stretch"
+                    }}
+                >
+                    <div ref={calendarRef} style={{ flex: 1, display: 'flex', flexDirection: 'column', border: "1px solid #eaecee",}}>
+                        <Calendar
+                            lang={lang}
+                            selected={value}
+                            handleSelect={handleSelect}
+                            today={now}
+                            viewYear={viewYear}
+                            viewMonth={viewMonth}
+                            setViewYear={setViewYear}
+                            setViewMonth={setViewMonth}
+                        />
+                        { (onSave || onClear || today) &&
+                            <Buttons
+                                onSave={onSave}
+                                onClear={onClear}
+                                today
+                                onToday={()=> {
+                                    setViewYear(now.getFullYear());
+                                    setViewMonth(now.getMonth());
+                                }}
                             />
-                            { (onSave || onClear || today) &&
-                                <Buttons
-                                    onSave={onSave}
-                                    onClear={onClear}
-                                    today
-                                    onToday={()=> {
-                                        setViewYear(now.getFullYear());
-                                        setViewMonth(now.getMonth());
-                                    }}
-                                />
-                            }
-                        </div>
-                        { time &&
-                            <Timer value={value} setValue={setValue} height={calendarHeight} />
                         }
                     </div>
+
+                </div>
             )}
+            {open && time &&
+                <Timer value={value} setValue={setValue} height={calendarHeight} month={viewMonth} />
+            }
         </div>
     )
 }

@@ -18,7 +18,6 @@ const Calendar:FC<CalendarProps> =({
 
     const [calendarType, setCalendarType] = useState<'DATE'|'MONTH'|'YEAR'>('DATE');
 
-    console.log(today)
 
     return (
         <div className="js-datepicker-calendar">
