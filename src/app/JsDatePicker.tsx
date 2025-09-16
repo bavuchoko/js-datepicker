@@ -9,6 +9,7 @@ import '../index.css';
 import Timer from "./sub/Timer";
 import {useOutsideClick} from "./hook/useOutsideClick";
 import {useDeterminePosition} from "./hook/useDeterminePosition";
+import {createPortal} from "react-dom";
 
 
 const JsDatePicker:FC<DatePickerProps> =(
@@ -62,11 +63,11 @@ const JsDatePicker:FC<DatePickerProps> =(
     useEffect(() => {
         if (open && calendarRef.current) {
             setCalendarHeight(calendarRef.current.offsetHeight);
-            const rect = calendarRef.current.getBoundingClientRect();
+            const rect = calendarRef.current;
             setTimerStyle({
                 position: 'absolute',
-                top: rect.top - 8,
-                left: rect.right -8,
+                top: rect.offsetTop + 30 ,
+                left: rect.offsetLeft + rect.offsetWidth,
                 zIndex: 1000,
             });
         }
@@ -94,7 +95,7 @@ const JsDatePicker:FC<DatePickerProps> =(
 
             {open && (
                 <div
-                    ref={calendarRef}
+
                     style={{
                         position: "absolute",
                         top: dropdownPosition === "bottom" ? "30px" : undefined,
@@ -106,7 +107,7 @@ const JsDatePicker:FC<DatePickerProps> =(
                         alignItems: "stretch"
                     }}
                 >
-                    <div style={{ flex: 1, display: 'flex', flexDirection: 'column', border: "1px solid #eaecee",}}>
+                    <div ref={calendarRef} style={{ flex: 1, display: 'flex', flexDirection: 'column', border: "1px solid #eaecee",}}>
                         <Calendar
                             lang={lang}
                             selected={value}
@@ -132,10 +133,12 @@ const JsDatePicker:FC<DatePickerProps> =(
 
                 </div>
             )}
-            {open && time &&
+            {open && time && ref.current &&
+                createPortal(
                 <div style={timerStyle}>
                     <Timer value={value} setValue={setValue} height={calendarHeight} month={viewMonth} />
-                </div>
+                </div>,
+                ref.current)
             }
         </div>
     )
