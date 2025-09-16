@@ -1,6 +1,6 @@
 {
   "name": "@bavuchoko/js-datepicker",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A customizable React Search Filter component.",
   "main": "dist/index.js",
   "module": "dist/index.js",
@@ -54,5 +54,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "dependencies": {
+    "@fortawesome/free-solid-svg-icons": "^7.0.1"
   }
 }
