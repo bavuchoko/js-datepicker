@@ -115,6 +115,13 @@ input[type="date"].js-datepicker-input{
   padding: 2px 8px;
 
 }
+.js-datepicker-display {
+  display: inline-block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  vertical-align: middle;
+}
 .js-datepicker-buttons > div:hover{
 
   background: #e5e5e5 !important;
