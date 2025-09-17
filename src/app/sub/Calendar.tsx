@@ -11,6 +11,7 @@ const Calendar:FC<CalendarProps> =({
                                                    handleSelect,
                                                    viewYear,
                                                    viewMonth,
+                                                   marked,
                                                    setViewYear,
                                                    today,
                                                    setViewMonth
@@ -40,6 +41,7 @@ const Calendar:FC<CalendarProps> =({
                     lang={lang}
                     today={today}
                     viewMonth={viewMonth}
+                    marked={marked}
                     viewYear={viewYear}
                     setViewMonth={setViewMonth}
                     setViewYear={setViewYear}

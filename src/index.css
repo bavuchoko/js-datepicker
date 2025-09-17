@@ -126,6 +126,19 @@ input[type="date"].js-datepicker-input{
 .js-datepicker-today{
   background: #deebfd !important;
 }
+.js-datepicker-marked {
+  position: relative;
+}
+.js-datepicker-marked::before {
+  content: "⯌";
+  position: absolute;
+  top: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 12px;
+  font-weight: bold;
+  color: #d22b1c;
+}
 .js-datepicker-body-container{
   display: flex;
 }

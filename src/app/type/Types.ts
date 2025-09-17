@@ -3,6 +3,7 @@ import {CSSProperties} from "react";
 export type DatePickerProps = {
     placeholder?: string;
     value?: Date | undefined;
+    marked?: Date[]|undefined;
     setValue?: (value: Date | undefined) => void;
     onChange?: (value: Date | undefined) => void;
     style?: CSSProperties;
@@ -19,6 +20,7 @@ export type CalendarProps = {
     selected: Date | undefined;
     handleSelect: (date: Date) => void;
     today?: Date;
+    marked?: Date[]|undefined;
     viewMonth: number;
     viewYear: number;
     setViewMonth: (fn: (m: number) => number) => void;

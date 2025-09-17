@@ -17,6 +17,7 @@ const JsDatePicker:FC<DatePickerProps> =(
         value,
         setValue,
         onChange,
+        marked,
         style,
         time,
         lang ='en',
@@ -113,6 +114,7 @@ const JsDatePicker:FC<DatePickerProps> =(
                             selected={value}
                             handleSelect={handleSelect}
                             today={now}
+                            marked={marked}
                             viewYear={viewYear}
                             viewMonth={viewMonth}
                             setViewYear={setViewYear}

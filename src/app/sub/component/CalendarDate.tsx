@@ -34,24 +34,36 @@ const CalendarDate:FC<CalendarDateProps> = (props) => {
             <div className="js-datepicker-calendar-days">
                 {days.map((day, idx) =>
                     day ? (
-                        <div
-                            key={idx}
-                            onClick={() => props.handleSelect(day)}
-                            className={`js-datepicker-calendar-date js-datepicker-date-${weekdays['en'][idx%7]}  
-                                ${ (props.today?.getFullYear() === day.getFullYear() 
-                                && props.today?.getMonth() === day.getMonth()
-                                && props.today?.getDate() === day.getDate()
-                            
-                            ) && 'js-datepicker-today'}                           
-                                js-datepicker-date-${day.getDate()} ${
-                                    props.selected &&
-                                    day.toDateString() === props.selected.toDateString()
-                                        ? "js-datepicker-selected"
-                                        : ''
-                            }`}
-                        >
-                            {day.getDate()}
-                        </div>
+                        (() => {
+                            const isToday =
+                                props.today?.getFullYear() === day.getFullYear() &&
+                                props.today?.getMonth() === day.getMonth() &&
+                                props.today?.getDate() === day.getDate();
+
+                            const isSelected =
+                                props.selected &&
+                                day.toDateString() === props.selected.toDateString();
+
+                            const isMarked =
+                                props.marked?.some(
+                                    (markedDate) => markedDate.toDateString() === day.toDateString()
+                                ) ?? false;
+
+                            return (
+                                <div
+                                    key={idx}
+                                    onClick={() => props.handleSelect(day)}
+                                    className={`js-datepicker-calendar-date js-datepicker-date-${weekdays['en'][idx % 7]}  
+                        ${isToday ? "js-datepicker-today" : ""}                         
+                        js-datepicker-date-${day.getDate()} 
+                        ${isSelected ? "js-datepicker-selected" : ""} 
+                        ${isMarked ? "js-datepicker-marked" : ""}
+                    `}
+                                >
+                                    {day.getDate()}
+                                </div>
+                            );
+                        })()
                     ) : (
                         <div key={idx} />
                     )
